@@ -14,7 +14,7 @@ description: Ingénieur en génie informatique de l'École Polytechnique. Spéci
 keywords: Henri Bikouri, ingénieur informatique, génie logiciel, intelligence artificielle, cloud computing, portfolio développeur, ENSPY, Yaoundé
 baseurl: ""                                      # the subpath of your site, e.g. /blog
 url: ""          # the base hostname & protocol for your site
-image: /assets/img/croppeda.jpg               # used to generate site link preview
+image: /assets/img/avatar/cropped1.jpeg               # used to generate site link preview
 # image_alt: Site web professionnel de Henri BIKOURI, ingénieur en génie informatique
 
 # =======================================#
