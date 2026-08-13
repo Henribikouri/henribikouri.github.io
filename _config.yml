@@ -21,14 +21,14 @@ image: /assets/img/croppeda.jpg               # used to generate site link previ
 # -----------SITE SETTINGS---------------#
 #========================================#
 author: Henri Bikouri
-profile_image: /assets/img/avatar/cropped.jpg
+profile_image: /assets/img/avatar/cropped1.jpeg
 occupation: Ingénieur Informatique
 snippet: Spécialisé en IA, génie logiciel et cloud computing
 twitter: hbikouri
 github: Henribikouri
 github_repository: Henribikouri.github.io
 # Lien nettoyé pour faire professionnel :
-linkedin: https://www.linkedin.com/in/henri-bikouri-bi-bep-a14463281
+linkedin: henri-bikouri-a14463281
 stackoverflow: 
 website: 
 codepen: 

@@ -1,0 +1,7 @@
+# Projets recemment deployes / en ligne, presentes sur la page d'accueil
+# (bandeau mobile + widget flottant desktop)
+
+- name: K-Construction
+  description: Site vitrine de l'entreprise K-Construction, spécialisée en bâtiment, travaux publics et génie civil.
+  image: /assets/img/enligne/kcons/const1.jpeg
+  demo: https://k-constructionbtp.com/

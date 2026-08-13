@@ -1505,3 +1505,413 @@ $font-family: Proxima, Helvetica, Arial, sans-serif;
   font-family: Proxima;
   margin: 5% 0 0 15%;
 }
+
+/* ============================================================
+   PROJET EN LIGNE — widget flottant (meme style PC et mobile)
+   ============================================================ */
+
+.enligne-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #149f98;
+  position: relative;
+  flex: none;
+}
+.enligne-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid #149f98;
+  animation: enligne-dot-pulse 1.8s infinite;
+}
+@keyframes enligne-dot-pulse {
+  0% { transform: scale(0.7); opacity: 0.9; }
+  70% { transform: scale(2); opacity: 0; }
+  100% { opacity: 0; }
+}
+/* --- Widget flottant --- */
+.enligne-widget {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1040;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+/* Masque le widget pendant que le menu mobile est ouvert,
+   pour eviter que les deux blocs flottants se superposent. */
+.enligne-widget.enligne-hidden {
+  opacity: 0;
+  transform: translateY(10px) scale(0.94);
+  pointer-events: none;
+}
+.enligne-panel {
+  width: 330px;
+  max-width: calc(100vw - 32px);
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 24px 55px rgba(20, 30, 28, 0.2), 0 4px 14px rgba(20, 30, 28, 0.1);
+  margin-bottom: 14px;
+  transform-origin: bottom right;
+  transform: scale(0.85) translateY(14px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.28s ease;
+}
+.enligne-widget.is-open .enligne-panel {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.enligne-panel-head {
+  background: #6c757d;
+  padding: 13px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.enligne-panel-who {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.enligne-panel-who .enligne-dot { background: #ffffff; }
+.enligne-panel-who .enligne-dot::after { border-color: #ffffff; }
+.enligne-panel-label {
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 700;
+}
+.enligne-panel-sub {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 11px;
+  margin-top: 1px;
+}
+.enligne-panel-close {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0;
+}
+.enligne-panel-card {
+  display: block;
+  padding: 16px;
+  text-decoration: none;
+  color: inherit;
+}
+.enligne-panel-card:hover {
+  text-decoration: none;
+  color: inherit;
+}
+.enligne-panel-thumb {
+  position: relative;
+  display: block;
+  height: 150px;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.enligne-panel-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.enligne-panel-card:hover .enligne-panel-thumb img {
+  transform: scale(1.06);
+}
+.enligne-live-pill {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 5px 10px 5px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #212529;
+}
+.enligne-live-pill .enligne-dot { width: 6px; height: 6px; }
+.enligne-panel-body {
+  display: block;
+}
+.enligne-panel-name {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: #212529;
+  margin-bottom: 4px;
+}
+.enligne-panel-desc {
+  display: block;
+  font-size: 12.5px;
+  color: #6c757d;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+.enligne-panel-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: #149f98;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.enligne-panel-btn i {
+  transition: transform 0.2s;
+}
+.enligne-panel-card:hover .enligne-panel-btn i {
+  transform: translateX(3px);
+}
+.enligne-panel-foot {
+  border-top: 1px solid #eee;
+  padding: 11px 16px;
+  text-align: center;
+}
+.enligne-panel-foot a {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0d7d77;
+  text-decoration: none;
+}
+.enligne-panel-foot a:hover {
+  text-decoration: underline;
+}
+
+.enligne-fab {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(150deg, #149f98, #0d7d77);
+  box-shadow: 0 12px 26px rgba(20, 159, 152, 0.4), 0 2px 6px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: #ffffff;
+  font-size: 20px;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.enligne-fab:hover { transform: scale(1.06); }
+.enligne-fab:active { transform: scale(0.96); }
+.enligne-fab-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid #149f98;
+  opacity: 0.5;
+  animation: enligne-fab-ring 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.enligne-widget.is-open .enligne-fab-ring {
+  animation: none;
+  opacity: 0;
+}
+@keyframes enligne-fab-ring {
+  0% { transform: scale(0.9); opacity: 0.55; }
+  70% { transform: scale(1.25); opacity: 0; }
+  100% { opacity: 0; }
+}
+.enligne-fab-icon-open,
+.enligne-fab-icon-close {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  transition: opacity 0.2s, transform 0.3s;
+}
+.enligne-fab-icon-close {
+  opacity: 0;
+  transform: rotate(-45deg);
+}
+.enligne-widget.is-open .enligne-fab-icon-open {
+  opacity: 0;
+  transform: rotate(45deg);
+}
+.enligne-widget.is-open .enligne-fab-icon-close {
+  opacity: 1;
+  transform: rotate(0);
+}
+.enligne-fab-badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #0d7d77;
+  font-size: 10.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  border: 2px solid #f4f6f5;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.enligne-widget.is-open .enligne-fab-badge {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+@media (max-width: 575px) {
+  .enligne-widget {
+    right: 14px;
+    bottom: 14px;
+  }
+  .enligne-panel-thumb {
+    height: 120px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enligne-dot::after,
+  .enligne-fab-ring {
+    animation: none !important;
+  }
+  .enligne-panel,
+  .enligne-fab,
+  .enligne-fab-badge {
+    transition: none !important;
+  }
+}
+
+/* ============================================================
+   NAVBAR MOBILE — icone hamburger/croix, ouverture fluide,
+   reseaux sociaux (uniquement en dessous du breakpoint lg, 991.98px)
+   ============================================================ */
+@media (max-width: 991.98px) {
+
+  /* --- Bouton hamburger / croix --- */
+  .mobile-toggler {
+    border: none;
+    padding: 6px;
+  }
+  .mobile-toggler:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  .hamburger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+  }
+  .hamburger-icon .bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background-color: #e9e4e4;
+    transform-origin: center;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+  }
+  .mobile-toggler[aria-expanded="true"] .bar-top {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .mobile-toggler[aria-expanded="true"] .bar-mid {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .mobile-toggler[aria-expanded="true"] .bar-bottom {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* --- Ouverture / fermeture fluide du menu --- */
+  #navbarSupportedContent.collapsing {
+    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  #navbarSupportedContent.show {
+    position: relative;
+  }
+  #navbarSupportedContent .navbar-nav .nav-item {
+    opacity: 0;
+    transform: translateY(-6px);
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  #navbarSupportedContent .navbar-nav .nav-item:last-child {
+    border-bottom: none;
+  }
+  #navbarSupportedContent .navbar-nav .nav-link {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  #navbarSupportedContent.show .navbar-nav .nav-item {
+    animation: mobile-nav-item-in 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  #navbarSupportedContent.show .navbar-nav .nav-item:nth-child(1) { animation-delay: 0.03s; }
+  #navbarSupportedContent.show .navbar-nav .nav-item:nth-child(2) { animation-delay: 0.07s; }
+  #navbarSupportedContent.show .navbar-nav .nav-item:nth-child(3) { animation-delay: 0.11s; }
+  #navbarSupportedContent.show .navbar-nav .nav-item:nth-child(4) { animation-delay: 0.15s; }
+  @keyframes mobile-nav-item-in {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* --- Reseaux sociaux --- */
+  #navbarSupportedContent .social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 14px 0 6px;
+    margin-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+  #navbarSupportedContent .social-icons .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  #navbarSupportedContent .social-icons .social-link:hover,
+  #navbarSupportedContent .social-icons .social-link:active {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+  }
+  #navbarSupportedContent .social-icons .social-link i {
+    font-size: 20px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hamburger-icon .bar,
+    #navbarSupportedContent.collapsing,
+    #navbarSupportedContent .navbar-nav .nav-item,
+    #navbarSupportedContent .social-icons .social-link {
+      transition: none !important;
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+}

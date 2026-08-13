@@ -4,7 +4,6 @@ permalink: /about.html
 title: "Profil Technique"
 description: "Ingénieur Logiciel & DevOps - Approche, Compétences et Philosophie."
 header-img: 
-last-updated: 2025-12-05
 ---
 
 <div class="about-container mt-2">
@@ -12,7 +11,7 @@ last-updated: 2025-12-05
         <div class="col-lg-5 mb-4 mb-lg-0 text-center">
             <div class="profile-wrapper animate__animated animate__fadeInLeft">
                 <div class="profile-card">
-                    <img src="{{ site.baseurl }}/assets/img/portrait2.png" 
+                    <img src="{{ site.baseurl }}/assets/img/portait02.jpeg" 
                          alt="Henri Bikouri - Portrait Ingénieur" 
                          class="profile-img img-fluid shadow-lg"
                          style="border-radius: 20px; border: 4px solid white;">

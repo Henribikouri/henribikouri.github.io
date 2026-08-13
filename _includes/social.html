@@ -1,48 +1,39 @@
 {% assign theme = site.data.themes[site.ui_theme] %}
 <!-- Displays Social Media Icons based on _config.yml settings -->
-<span style="color:{{ theme.social-color }};">
-    <i> &nbsp;&nbsp; </i>
+<div class="social-icons">
     {% if site.twitter %}
-        <a class="social-link" href="https://twitter.com/{{ site.twitter }}">
-        <span style="color: {{ theme.social-color }};">
-            <i class="fab fa-twitter-square fa-lg"></i></a>
-        </span>
+        <a class="social-link" href="https://twitter.com/{{ site.twitter }}" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" style="color: {{ theme.social-color }};">
+            <i class="fab fa-square-x-twitter fa-lg"></i>
+        </a>
     {% endif %}
     {% if site.github %}
-        <a href="https://github.com/{{ site.github }}">
-        <span style="color: {{ theme.social-color }};">
-            <i class="fab fa-github-square fa-lg"></i></a>
-        </span>
+        <a class="social-link" href="https://github.com/{{ site.github }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub" style="color: {{ theme.social-color }};">
+            <i class="fab fa-github-square fa-lg"></i>
+        </a>
     {% endif %}
     {% if site.linkedin %}
-        <a href="https://www.linkedin.com/in/{{ site.linkedin }}">
-        <span style="color: {{ theme.social-color }};">
-            <i class="fab fa-linkedin fa-lg"></i></a>
-        </span>
+        <a class="social-link" href="https://www.linkedin.com/in/{{ site.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style="color: {{ theme.social-color }};">
+            <i class="fab fa-linkedin fa-lg"></i>
+        </a>
     {% endif %}
     {% if site.codepen %}
-        <a href="https://codepen.io/{{ site.codepen }}">
-        <span style="color: {{ theme.social-color }};">
-            <i class="fab fa-codepen fa-lg"></i></a>
-        </span>
+        <a class="social-link" href="https://codepen.io/{{ site.codepen }}" target="_blank" rel="noopener noreferrer" aria-label="CodePen" style="color: {{ theme.social-color }};">
+            <i class="fab fa-codepen fa-lg"></i>
+        </a>
     {% endif %}
     {% if site.stackoverflow %}
-        <a href="https://stackoverflow.com/users/story/{{ site.stackoverflow }}">
-        <span style="color: {{ theme.social-color }};">
-            <i class="fab fa-stack-overflow fa-lg"></i></a>
-        </span>
+        <a class="social-link" href="https://stackoverflow.com/users/story/{{ site.stackoverflow }}" target="_blank" rel="noopener noreferrer" aria-label="Stack Overflow" style="color: {{ theme.social-color }};">
+            <i class="fab fa-stack-overflow fa-lg"></i>
+        </a>
     {% endif %}
     {% if site.medium %}
-        <a href="https://{{ site.medium }}.medium.com/">
-        <span style="color: {{ theme.social-color }};">
-            <i class="fab fa-medium fa-lg"></i></a>
-        </span>
+        <a class="social-link" href="https://{{ site.medium }}.medium.com/" target="_blank" rel="noopener noreferrer" aria-label="Medium" style="color: {{ theme.social-color }};">
+            <i class="fab fa-medium fa-lg"></i>
+        </a>
     {% endif %}
     {% if site.keybase %}
-        <a href="https://keybase.io/{{ site.keybase }}">
-        <span style="color: {{ theme.social-color }};">
-            <i class="fab fa-keybase"></i></a>
-        </span>
-    {% endif %} 
-    <i> &nbsp;&nbsp; </i>
-</span>
+        <a class="social-link" href="https://keybase.io/{{ site.keybase }}" target="_blank" rel="noopener noreferrer" aria-label="Keybase" style="color: {{ theme.social-color }};">
+            <i class="fab fa-keybase"></i>
+        </a>
+    {% endif %}
+</div>

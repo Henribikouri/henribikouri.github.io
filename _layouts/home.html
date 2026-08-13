@@ -39,6 +39,9 @@ layout: default
       <div class="card-body mt-0" style="color:{{theme.education-font-color}};">
       {% endif %}
         <p style="color:{{theme.education-font-color}};">{{ content | markdownify}}<p>
+
+        {% assign live_project = site.data.enligne.first %}
+
         {% if site.home_option == "education" %}
           {% include education.html %}
         {% endif %}
@@ -46,6 +49,46 @@ layout: default
     </div>
   </div>
 </div>
+
+<!-- WIDGET FLOTTANT "PROJET EN LIGNE" (PC et mobile, meme style) -->
+{% if live_project %}
+<div class="enligne-widget" id="enligneWidget">
+  <div class="enligne-panel" id="enlignePanel">
+    <div class="enligne-panel-head">
+      <div class="enligne-panel-who">
+        <span class="enligne-dot"></span>
+        <div>
+          <div class="enligne-panel-label">Projet en ligne</div>
+          <div class="enligne-panel-sub">Récemment déployé</div>
+        </div>
+      </div>
+      <button type="button" class="enligne-panel-close" id="enlignePanelClose" aria-label="Fermer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+    </div>
+    <a href="{{ live_project.demo }}" target="_blank" rel="noopener noreferrer" class="enligne-panel-card">
+      <span class="enligne-panel-thumb">
+        <span class="enligne-live-pill"><span class="enligne-dot"></span>En ligne</span>
+        <img src="{{ site.baseurl }}{{ live_project.image }}" alt="{{ live_project.name }}">
+      </span>
+      <span class="enligne-panel-body">
+        <span class="enligne-panel-name">{{ live_project.name }}</span>
+        <span class="enligne-panel-desc">{{ live_project.description }}</span>
+      </span>
+      <span class="enligne-panel-btn">Consulter le site <i class="fas fa-arrow-right"></i></span>
+    </a>
+    <div class="enligne-panel-foot">
+      <a href="#projets" id="enligneSeeAll">Voir tous mes projets</a>
+    </div>
+  </div>
+  <button type="button" class="enligne-fab" id="enligneFab" aria-label="Voir le projet en ligne">
+    <span class="enligne-fab-ring"></span>
+    <span class="enligne-fab-badge">{{ site.data.enligne.size }}</span>
+    <svg class="enligne-fab-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6M12 19h8"/></svg>
+    <svg class="enligne-fab-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
+  </button>
+</div>
+{% endif %}
 
 <!-- style="font-family:{{ theme.link-font }};background-color:{{ theme.nav-color }}; -->
 
@@ -304,7 +347,78 @@ layout: default
     e.preventDefault()
     $(this).tab('show')
     })
-</script> 
+</script>
+
+<!-- JS POUR LE BANDEAU / WIDGET "PROJET EN LIGNE" -->
+<script>
+(function () {
+    // --- Widget flottant "Projet en ligne" (PC + mobile) ---
+    var widget = document.getElementById('enligneWidget');
+    if (widget) {
+        var fab = document.getElementById('enligneFab');
+        var closeBtn = document.getElementById('enlignePanelClose');
+        var isOpen = false;
+        var navIsOpen = false;
+        var pendingAutoOpen = false;
+
+        function setOpen(open) {
+            isOpen = open;
+            widget.classList.toggle('is-open', open);
+        }
+
+        function setWidgetHidden(hidden) {
+            widget.classList.toggle('enligne-hidden', hidden);
+            if (hidden) { setOpen(false); }
+        }
+
+        function tryAutoOpen() {
+            if (navIsOpen) { pendingAutoOpen = true; return; }
+            setOpen(true);
+            sessionStorage.setItem('enligneAutoOpened', '1');
+        }
+
+        fab.addEventListener('click', function () { setOpen(!isOpen); });
+        closeBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            setOpen(false);
+        });
+
+        if (!sessionStorage.getItem('enligneAutoOpened')) {
+            setTimeout(tryAutoOpen, 1500);
+        }
+
+        // Le menu mobile passe devant : on masque le widget pendant qu'il est ouvert
+        // pour eviter que les deux blocs flottants se superposent.
+        var mobileNav = document.getElementById('navbarSupportedContent');
+        if (mobileNav) {
+            $(mobileNav).on('show.bs.collapse', function () {
+                navIsOpen = true;
+                setWidgetHidden(true);
+            });
+            $(mobileNav).on('hidden.bs.collapse', function () {
+                navIsOpen = false;
+                setWidgetHidden(false);
+                if (pendingAutoOpen && !sessionStorage.getItem('enligneAutoOpened')) {
+                    pendingAutoOpen = false;
+                    tryAutoOpen();
+                }
+            });
+        }
+
+        var seeAll = document.getElementById('enligneSeeAll');
+        if (seeAll) {
+            seeAll.addEventListener('click', function (e) {
+                e.preventDefault();
+                setOpen(false);
+                var projetsTab = document.querySelector('#test-list a[href="#projets"]');
+                if (projetsTab) { $(projetsTab).tab('show'); }
+                var target = document.getElementById('projets');
+                if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+            });
+        }
+    }
+})();
+</script>
 
 <!-- OPTIONAL TOAST JS FUNCTION-->
 <script>
@@ -318,13 +432,6 @@ layout: default
 $('body').scrollspy({ target: '#list-example' })
 </script>
 
-<script>
-$('.collapse').collapse()
-</script>
-
-<script>
-$('.show').show()
-</script>
 
 <script>
 $(document).ready(function() {
