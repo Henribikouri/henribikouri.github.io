@@ -1543,6 +1543,15 @@ $font-family: Proxima, Helvetica, Arial, sans-serif;
   opacity: 1;
   transform: translateY(0) scale(1);
   transition: opacity 0.25s ease, transform 0.25s ease;
+  /* Le conteneur ne doit jamais intercepter de clics : seuls le FAB et le
+     panneau (quand il est ouvert) sont interactifs. Sans ca, le panneau
+     ferme (opacity:0, pointer-events:none) laisse quand meme son espace
+     reserve dans ce flex container, et les clics dessus tombaient sur ce
+     div au lieu du contenu de la page en dessous. */
+  pointer-events: none;
+}
+.enligne-widget .enligne-fab {
+  pointer-events: auto;
 }
 /* Masque le widget pendant que le menu mobile est ouvert,
    pour eviter que les deux blocs flottants se superposent. */
@@ -1597,6 +1606,7 @@ $font-family: Proxima, Helvetica, Arial, sans-serif;
 .enligne-panel-close {
   width: 26px;
   height: 26px;
+  flex-shrink: 0;
   border-radius: 50%;
   border: none;
   background: rgba(255, 255, 255, 0.14);
@@ -1607,6 +1617,16 @@ $font-family: Proxima, Helvetica, Arial, sans-serif;
   cursor: pointer;
   font-size: 12px;
   padding: 0;
+}
+/* Sans largeur/hauteur explicites, ce SVG (sans width/height ni CSS dediee)
+   peut se retrouver rendu a taille nulle dans un flex container sur iOS
+   Safari : c'est pourquoi la croix de fermeture n'apparaissait pas sur
+   certains iPhone. */
+.enligne-panel-close svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  display: block;
 }
 .enligne-panel-card {
   display: block;

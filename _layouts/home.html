@@ -360,6 +360,7 @@ layout: default
         var isOpen = false;
         var navIsOpen = false;
         var pendingAutoOpen = false;
+        var openToken = 0;
 
         function setOpen(open) {
             isOpen = open;
@@ -375,9 +376,25 @@ layout: default
             if (navIsOpen) { pendingAutoOpen = true; return; }
             setOpen(true);
             sessionStorage.setItem('enligneAutoOpened', '1');
+            // Sur mobile, le panneau ouvert recouvre une grande partie de l'ecran
+            // (menu, onglets Experience/Formations/Projets...) et bloquerait les
+            // clics en dessous s'il restait ouvert : on le referme donc tout seul
+            // apres quelques secondes, comme un aperçu furtif. Sur PC il reste
+            // ouvert jusqu'a ce que l'utilisateur le ferme, comme avant.
+            if (window.matchMedia('(max-width: 767.98px)').matches) {
+                openToken++;
+                (function (token) {
+                    setTimeout(function () {
+                        if (isOpen && token === openToken) { setOpen(false); }
+                    }, 5000);
+                })(openToken);
+            }
         }
 
-        fab.addEventListener('click', function () { setOpen(!isOpen); });
+        fab.addEventListener('click', function () {
+            openToken++; // invalide toute fermeture auto en attente
+            setOpen(!isOpen);
+        });
         closeBtn.addEventListener('click', function (e) {
             e.preventDefault();
             setOpen(false);
